@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="utf-8">
+
+      <title>Rainy War</title>
+      <h1>RainyWar</h1>
+    <div id="lyrball"
+          style="position:absolute; left:200px; top:0px;">
+      <img src="bb01.png" alt="表示できません">
+    </div>
+
+    <div id="lyrracket"cmanOMat="move"
+          style="position:absolute; left:500px; top:540px;">
+      <img src="bb02.png" alt="表示できません">
+    </div>
+
+<a href="JavaScript:gamestart()"><h3>[start]</h3></a>
+
+    <script type="text/javascript">
+
+var ballx;
+var bally;
+var timerID;
+var mousex;
+var score=0;
+var f;
+
+function gamestart(){
+  document.onmousemove=evMouseMove;
+
+  ballx=lyrGetLeft("lyrball");
+  ballx=Math.floor(Math.random()*1200);
+  bally=lyrGetTop("lyrball");
+  bally=0;
+  lyr1("lyrball",ballx,bally);
+
+if(score==6){
+  alert("LEVEL2");
+}
+
+if(score==31){
+  alert("LEVEL3");
+}
+
+if(score==51){
+  alert("LEVEL4");
+}
+
+  gamebody();
+}
+
+function lyr2(lyrracket,racketx,rackety){
+  document.getElementById(lyrracket).style.pixelLeft=racketx;
+  document.getElementById(lyrracket).style.pixelTop=rackety;
+}
+
+function lyr1(lyrball,ballx,bally){
+  document.getElementById(lyrball).style.pixelLeft=ballx;
+  document.getElementById(lyrball).style.pixelTop=bally;
+}
+
+function lyrGetTop(lyrball){
+  return(parseInt(document.getElementById(lyrball).style.pixelTop));
+return(0);
+}
+
+function lyrGetLeft(lyrball){
+  return(parseInt(document.getElementById(lyrball).style.pixelLeft));
+return(0);
+}
+
+function evMouseMove(e){
+mousex=document.body.scrollLeft+event.clientX;
+lyr2("lyrracket",mousex-86,540);
+}
+
+    </script>
+  </head>
+  <body bgcolor="#13549" text"blue">
+
+    <script type="text/javascript">
+
+function gamebody(){
+  clearTimeout(timerID);
+
+  bally+=3;
+
+if(score>5){
+  bally+=4;
+}
+
+if(score>30){
+  bally+=5;
+}
+
+if(score>50){
+  bally+=6;
+}
+
+lyr1("lyrball",ballx,bally);
+  timerID = setTimeout("gamebody()",10)
+
+if(bally>493){
+if(ballx-60>mousex-172 && ballx-60<mousex){
+score++;
+gamestart();
+}
+
+else{
+  document.write("今回の記録は"+score+"回です。");
+}
+
+} }
+
+     </script>
+   </body>
+</html>
